@@ -81,12 +81,14 @@ $(function() {
 		},
 		close: function() {
 			this.people.create({
+
 			name: $('#name').val(),
 			email:$('#email').val(),
 			mobile:$('#mobile').val(),
 			wechat:$('#wechat').val(),
 			 order: this.people.nextOrder()
 			});
+			alert('New object created');
 		}
 
 	});	
