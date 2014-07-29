@@ -44,11 +44,12 @@
 
     <div id="main">
         <div class="header">
-            <h1>Page Title</h1>
-            <h2>A subtitle for your page goes here</h2>
+            <h1>噬菌体部落</h1>
+            <h2>常州市第三中学2007届高三（2）班通讯录</h2>
         </div>
 
         <div class="content">
+
             <h2 class="content-subhead">How to use this layout</h2>
             <p>
                 To use this layout, you can just copy paste the HTML, along with the CSS in <a href="/css/layouts/side-menu.css" alt="Side Menu CSS">side-menu.css</a>, and the JavaScript in <a href="/js/ui.js">ui.js</a>. The JS file uses vanilla JavaScript to simply toggle an <code>active</code> class that makes the menu responsive.
@@ -73,10 +74,39 @@
     <p>主页</p>
 </script>
 <script type="text/template" id="add-tpl">
-    <p>增加信息</p>
+               <div class="pure-form pure-form-aligned">
+                <fieldset>
+                    <div class="pure-control-group">
+                        <label for="name">姓名</label>
+                        <input id="name" type="text" placeholder="Your Name Here" >
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="mobile">手机号码</label>
+                        <input id="mobile" type="text" placeholder="Your Mobile Phone">
+                    </div>
+ 
+                    <div class="pure-control-group">
+                        <label for="email">电子邮件</label>
+                        <input id="email" type="email" placeholder="Email Address Here">
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="wechat">微信</label>
+                        <input id="wechat" type="text" placeholder="Your Wechat Number">
+                    </div>
+
+                    <div class="pure-controls">
+                            <button type="submit" class="btn-save pure-button pure-button-primary">Submit</button>
+                    </div>
+                </fieldset>
+            </div>
 </script>
 <script type="text/template" id="all-tpl">
-    <p>显示所有的信息</p>
+        <div  id="impress">
+        </div>  
+</script>
+<script type="text/template" id="single-tpl">
+    <p><%=name%></p>
 </script>
 </body>
 </html>
