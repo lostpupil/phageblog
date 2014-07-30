@@ -75,50 +75,65 @@
 <script type="text/template" id="home-tpl">
     <p>主页</p>
 </script>
-<script type="text/template" id="add-tpl">
-               <div class="pure-form pure-form-aligned">
-                <fieldset>
-                    <div class="pure-control-group">
-                        <label for="name">姓名</label>
-                        <input id="name" type="text" placeholder="Your Name Here" >
-                    </div>
-                    <div class="pure-control-group">
-                        <label for="mobile">手机号码</label>
-                        <input id="mobile" type="text" placeholder="Your Mobile Phone">
-                    </div>
- 
-                    <div class="pure-control-group">
-                        <label for="email">电子邮件</label>
-                        <input id="email" type="email" placeholder="Email Address Here">
-                    </div>
 
-                    <div class="pure-control-group">
-                        <label for="wechat">微信</label>
-                        <input id="wechat" type="text" placeholder="Your Wechat Number">
-                    </div>
 
-                    <div class="pure-controls">
-                            <button type="submit" class="btn-save pure-button pure-button-primary">Submit</button>
-                    </div>
-                </fieldset>
-            </div>
-</script>
 
-<script type="text/template" id="all-tpl">
-<div> <button id="save" class="btn-save pure-button pure-button-primary">Add New</button></div>
-<ul id="impress">
 
-</ul>
+<script type="text/template" id="login-template">
+      <header id="header"></header>
+      <div class="login">
+        <form class="login-form">
+          <h2>Log In</h2>
+          <div class="error" style="display:none"></div>
+          <input type="text" id="login-username" placeholder="Username" />
+          <input type="password" id="login-password" placeholder="Password" />
+          <button>Log In</button>
+        </form>
 
-</script>
+        <form class="signup-form">
+          <h2>Sign Up</h2>
+          <div class="error" style="display:none"></div>
+          <input type="text" id="signup-username" placeholder="Username" />
+          <input type="password" id="signup-password" placeholder="Create a Password" />
+          <button>Sign Up</button>
+        </form>
+      </div>
+    </script>
 
-<script type="text/template" id="single-tpl">
-<input type="text" name="name" value="<%=name%>" > 
-        <input type="text" name="mobile" value="<%=mobile%>" > 
-        <input type="text" name="email" value="<%=email%>" > 
-        <input type="text" name="wechat" value="<%=wechat%>" > 
-        <button class="upd pure-button button-warning" data-id="<%=objectId%>">更新</button>
-</script>
+    <script type="text/template" id="manage-todos-template">
+      <div id="user-info">
+        Signed in as <%= AV.User.current().get("username") %> (<a href="#" class="log-out">Log out</a>)
+      </div>
+
+      <div class="section">
+
+        <header id="header">
+        <button id="save" class="btn ">Add New</button>
+        </header>
+
+        <div id="main">
+          
+          <ul id="todo-list">
+          </ul>
+        </div>
+
+      </div>
+    </script>
+
+    <script type="text/template" id="item-template">
+      <li >
+    <div class="view">
+      <button class="todo-destroy"></button>
+    </div>
+    <input value="<%= name %>" name="name">
+    <input value="<%=wechat %>" name="wechat">
+    <input value="<%=mobile %>" name="mobile">
+      <input value="<%=email%>" name="email">
+    <button class="upd">Update</button>
+      </li>
+    </script>
+
+
 </body>
 </html>
 
