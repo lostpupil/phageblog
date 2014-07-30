@@ -116,7 +116,8 @@ $(function() {
 			this.people.bind('add', this.addOne);
 			this.people.bind('reset', this.addAll);
 		  	 this.people.fetch();
-		  	 this.$el.html(_.template($("#all-tpl").html()));
+		  	
+		  	 this.render();
 		  },
 		addOne: function(people) {
 		    var view = new SingleView({
@@ -131,6 +132,11 @@ $(function() {
 		    this.$("#impress").html("");
 		    this.people.each(this.addOne);
 		},
+		render: function() {
+			this.$el.html(_.template($("#all-tpl").html()));
+			this.delegateEvents();
+       		 }
+
 	});	
 	// The main view for the app
 	var AppView = AV.View.extend({
@@ -152,21 +158,44 @@ $(function() {
 	"all": "all",
 	"home": "home",
 	"add": "add"
-	
+
 	},
+	currentView: null,
+	initialize: function(el) {
+		this.el = el;
+		this.allview = new AllView();
+		this.homeview = new HomeView();
+		this.addview = new AddView();
+	},
+	remove: function() {
+		// Empty the element and remove it from the DOM while preserving events
+		$(this.el).empty().detach();
+		return this;
+	},
+	switchView: function(view) {
+		if (this.currentView) {
+			// Detach the old view
+			this.currentView.remove();
+		}
+		// Move the view element into the DOM (replacing the old content)
+		$('#submain').html(view.el);
 
-	initialize: function(options) {},
+		// Render view after it is in the DOM (styles are applied)
+		view.render();
 
+		this.currentView = view;
+	},
 	all: function() {
-		new AllView();
+		this.switchView(this.allview);
+		console.log(this);
 	},
 
 	home: function() {
-		new HomeView();
+		this.switchView(this.homeview);
 	},
 
 	add: function() {
-		new AddView();
+		this.switchView(this.addview);
 	}
 	});
 	new AppRouter;
