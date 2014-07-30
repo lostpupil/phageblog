@@ -152,6 +152,7 @@ $(function() {
 	"all": "all",
 	"home": "home",
 	"add": "add"
+	
 	},
 
 	initialize: function(options) {},
