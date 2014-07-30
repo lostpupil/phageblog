@@ -37,38 +37,81 @@ $(function() {
 
 	});
 
-	var HomeView = AV.View.extend({
-		 events:{
+	 var SingleView = AV.View.extend({
+       	        tagName: "li",
+	        template: _.template($('#single-tpl').html()),
+	        // The DOM events specific to an item.
+	        events: {
+	             "click .upd": "updatepeople"
+	        },
 
-		 },
-		 el: ".content",
-		  initialize: function() {
-		  	 this.render();
-		  },
-		render: function() {
-			this.$el.html(_.template($("#home-tpl").html()));
-			this.delegateEvents();
-       		 }
-	});
-	var AddView = AV.View.extend({
-		 events:{
-		 	 "click .btn-save": "peoplesave"
-		 },
-		 el: ".content",
-		  initialize: function() {
-		  	 this.people = new PeopleList;
-		  	  _.bindAll(this, 'render', 'close');
-		  	 this.render();
-		  },
+	        initialize: function() {
+		_.bindAll(this, 'render','close');
 
-		render: function() {
-			this.$el.html(_.template($("#add-tpl").html()));
-			this.delegateEvents();
-       		 },
-       		peoplesave: function(e) {
+		this.model.bind('change', this.render);
+
+	        },
+
+	        // Re-render the contents of the todo item.
+	        render: function() {
+
+		$(this.el).html(this.template(this.model.toJSON()));
+		this.name=this.$("input[name='name']");
+		this.email=this.$("input[name='email']");
+		this.mobile=this.$("input[name='mobile']");
+		this.wechat=this.$("input[name='dataZ']");
+	            return this;
+	        },
+		 updatepeople: function(e) {
 			this.close();
-		},
+		        },
 		close: function() {
+		this.model.save({
+			name:this.name.val(),
+			email:this.email.val(),
+			mobile:this.mobile.val(),
+			wechat:this.wechat.val()
+		});
+		}
+
+	    });
+	var AllView = AV.View.extend({
+		 events:{
+		 	 "click #save": "createOnEnter"
+		 },
+		 el: ".content",
+		  initialize: function() {
+		  	 var self = this;
+		  	 _.bindAll(this, 'addOne', 'addAll', 'addSome', 'render', 'createOnEnter');
+			this.$el.html(_.template($("#all-tpl").html()));
+			this.people = new PeopleList;
+			this.people.bind('add', this.addOne);
+			this.people.bind('reset', this.addAll);
+			this.people.bind('all', this.render);
+			this.people.fetch();
+		  },
+		addOne: function(people) {
+		    var view = new SingleView({
+		        model: people
+		    });    
+		var something =view.render().el;
+		this.$("#impress").append(something.innerHTML);
+
+		},
+		addSome: function() {
+		var self = this;
+		this.$("#impresst").html("");
+		this.people.chain().each(function(item) {
+		self.addOne(item)
+		});
+		},
+
+		// Add all items in the Todos collection at once.
+		addAll: function(collection) {
+		    this.$("#impress").html("");
+		    this.people.each(this.addOne);
+		},
+		createOnEnter: function() {
 			this.people.create({
 
 			name: $('#name').val(),
@@ -79,63 +122,6 @@ $(function() {
 			});
 			alert('New object created');
 		}
-
-	});	
-	 var SingleView = AV.View.extend({
-	        template: _.template($('#single-tpl').html()),
-	        // The DOM events specific to an item.
-	        events: {
-	            "click .btn-del": "clear"
-	        },
-
-	        initialize: function() {
-		_.bindAll(this, 'render');
-
-	        },
-	        clear:function(){
-	        	console.log("hi");
-	        	 this.model.destroy();
-	        },
-
-	        // Re-render the contents of the todo item.
-	        render: function() {
-	            $(this.el).html(this.template(this.model.toJSON()));
-	            return this;
-	        },
-
-	    });
-	var AllView = AV.View.extend({
-		 events:{
-
-		 },
-		 el: ".content",
-		  initialize: function() {
-		  	 var self = this;
-		  	 _.bindAll(this, 'addOne', 'addAll');
-		  	 this.people = new PeopleList;
-			this.people.bind('add', this.addOne);
-			this.people.bind('reset', this.addAll);
-		  	 this.people.fetch();
-		  	
-		  	 this.render();
-		  },
-		addOne: function(people) {
-		    var view = new SingleView({
-		        model: people
-		    });    
-		var something =view.render().el;
-		this.$("#impress").append(something.innerHTML);
-		},
-
-		// Add all items in the Todos collection at once.
-		addAll: function(collection) {
-		    this.$("#impress").html("");
-		    this.people.each(this.addOne);
-		},
-		render: function() {
-			this.$el.html(_.template($("#all-tpl").html()));
-			this.delegateEvents();
-       		 }
 
 	});	
 	// The main view for the app
@@ -149,57 +135,12 @@ $(function() {
 		},
 
 		render: function() {
-			new HomeView();
+			new AllView();
 		}
 	});
 
-	var AppRouter = AV.Router.extend({
-	routes: {
-	"all": "all",
-	"home": "home",
-	"add": "add"
 
-	},
-	currentView: null,
-	initialize: function(el) {
-		this.el = el;
-		this.allview = new AllView();
-		this.homeview = new HomeView();
-		this.addview = new AddView();
-	},
-	remove: function() {
-		// Empty the element and remove it from the DOM while preserving events
-		$(this.el).empty().detach();
-		return this;
-	},
-	switchView: function(view) {
-		if (this.currentView) {
-			// Detach the old view
-			this.currentView.remove();
-		}
-		// Move the view element into the DOM (replacing the old content)
-		$('#submain').html(view.el);
-
-		// Render view after it is in the DOM (styles are applied)
-		view.render();
-
-		this.currentView = view;
-	},
-	all: function() {
-		this.switchView(this.allview);
-		console.log(this);
-	},
-
-	home: function() {
-		this.switchView(this.homeview);
-	},
-
-	add: function() {
-		this.switchView(this.addview);
-	}
-	});
-	new AppRouter;
 	new AppView;
-	AV.history.start();
+	
 });
 

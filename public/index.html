@@ -36,9 +36,9 @@
             <a class="pure-menu-heading" href="/">噬菌体部落</a>
 
             <ul>
-                <li><a href="#home">首页</a></li>
-                <li><a href="#all">所有联系人</a></li>
-                <li><a href="#add">增加联系信息</a></li>
+                <p><a href="#home">首页</a></p>
+                <p><a href="#all">所有联系人</a></p>
+                <p><a href="#add">增加联系信息</a></p>
             </ul>
         </div>
     </div>
@@ -103,33 +103,21 @@
                 </fieldset>
             </div>
 </script>
-<script type="text/template" id="all-tpl">
 
-        <table class="pure-table">
-            <thead>
-                <tr>
-                    <td>姓名</td>
-                    <td>手机</td>
-                    <td>电子邮件</td>
-                    <td>微信</td>
-                    <td>操作</td>
-                </tr>
-            </thead>
-            <tbody  id="impress"  class="col">
-            </tbody>
-        </table>
+<script type="text/template" id="all-tpl">
+<div> <button id="save" class="btn-save pure-button pure-button-primary">Add New</button></div>
+<ul id="impress">
+
+</ul>
 
 </script>
+
 <script type="text/template" id="single-tpl">
-<tr>
-            <td><%=name%></td>
-        <td><%=mobile%></td>
-        <td><%=email%></td>
-        <td><%=wechat%></td>
-        <td><button class="pure-button button-warning btn-del">删除</button></td>
-</tr>
-
-
+<input type="text" name="name" value="<%=name%>" > 
+        <input type="text" name="mobile" value="<%=mobile%>" > 
+        <input type="text" name="email" value="<%=email%>" > 
+        <input type="text" name="wechat" value="<%=wechat%>" > 
+        <button class="upd pure-button button-warning" data-id="<%=objectId%>">更新</button>
 </script>
 </body>
 </html>
