@@ -37,17 +37,6 @@ $(function() {
 
 	});
 
-
-
-
-
-	// This is the transient application state, not persisted on AV
-	var AppState = AV.Object.extend("AppState", {
-	defaults: {
-	filter: "all"
-	}
-	});
-
 	var HomeView = AV.View.extend({
 		 events:{
 
