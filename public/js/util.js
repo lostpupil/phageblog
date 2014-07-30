@@ -83,16 +83,18 @@ $(function() {
 	});	
 	 var SingleView = AV.View.extend({
 	        template: _.template($('#single-tpl').html()),
-
 	        // The DOM events specific to an item.
 	        events: {
-	           
+	            "click .btn-del": "clear"
 	        },
 
 	        initialize: function() {
-	            _.bindAll(this, 'render');
-	            this.model.bind('change', this.render);
-	            this.model.bind('destroy', this.remove);
+		_.bindAll(this, 'render');
+
+	        },
+	        clear:function(){
+	        	console.log("hi");
+	        	 this.model.destroy();
 	        },
 
 	        // Re-render the contents of the todo item.
@@ -100,6 +102,7 @@ $(function() {
 	            $(this.el).html(this.template(this.model.toJSON()));
 	            return this;
 	        },
+
 	    });
 	var AllView = AV.View.extend({
 		 events:{
@@ -166,7 +169,7 @@ $(function() {
 	}
 	});
 	new AppRouter;
-	// new AppView;
+	new AppView;
 	AV.history.start();
 });
 
