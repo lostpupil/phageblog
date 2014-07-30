@@ -102,11 +102,19 @@
             </div>
 </script>
 <script type="text/template" id="all-tpl">
-        <div  id="impress">
-        </div>  
+
+            <table class="pure-table" id="impress">
+
+        </table>
+
 </script>
 <script type="text/template" id="single-tpl">
-    <p><%=name%></p>
+    <tr>
+        <td><%=name%></td>
+        <td><%=mobile%></td>
+        <td><%=email%></td>
+        <td><%=wechat%></td>
+    </tr>
 </script>
 </body>
 </html>
