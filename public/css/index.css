@@ -1,3 +1,16 @@
 .button-warning {
 	background: rgb(223, 117, 20); /* this is an orange */
 }
+.button-delete{
+	background: #c53d43;
+}
+.button-update{
+	background:#dccb18;
+}
+body{
+	background-color: #f5f5f5;
+	font-family: "微软雅黑",Tahoma, Helvetica, Arial, "Microsoft Yahei", STXihei, "华文细黑", sans-serif;
+}
+article{
+	/*text-align: center;*/
+}

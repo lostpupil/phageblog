@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/pure-min.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/grids-responsive-min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/underscore-1.1.6.js"></script>
@@ -35,10 +36,10 @@
 
     <div id="menu">
         <div class="pure-menu pure-menu-open">
-            <h3 class="pure-menu-headin">噬菌体部落</h2>
+            <h3 class="pure-menu-heading">噬菌体部落</h2>
             <ul>
-                <p><a href="#home">首页</a></p>
-                <p><a href="/">所有联系人</a></p>
+                <li><a href="/">所有人</a></li>
+                 <li><a href="#home">一些东西</a></li>
             </ul>
         </div>
     </div>
@@ -50,64 +51,65 @@
         </div>
         <div class="content">
 
-            <h2 class="content-subhead">How to use this layout</h2>
-            <p>
-                To use this layout, you can just copy paste the HTML, along with the CSS in <a href="/css/layouts/side-menu.css" alt="Side Menu CSS">side-menu.css</a>, and the JavaScript in <a href="/js/ui.js">ui.js</a>. The JS file uses vanilla JavaScript to simply toggle an <code>active</code> class that makes the menu responsive.
-            </p>
 
-    </div>
+
+         </div>
 </div>
 <script src="js/ui.js"></script>
+
+
 <script type="text/template" id="home-tpl">
-    <p>主页</p>
+<div class="pure-g">
+    <div class="pure-u-1">
+<article>
+<h2>刚刚好就是真的好</h2>
+<h3>Good enough is fine</h3>
+<p>很多人沉迷于用复杂的方法去解决问题。人们常常陶醉于做脑力体操，然后就会寻找下一个让你心驰神往的大挑战，不管是不是个好主意。</p>
+<p>更好地方法是：找一个四两拨千斤的解决方案，以最小的投入获得最大的产出。 想要以小博大，其中的重要一点就是要认识到任何问题都是可以变通的。比如说，你目前要解决的问题是鸟瞰人间。其中一个办法是爬上珠穆朗玛峰。这个解决方案相当“彪悍”。不过还有另一个方法，就是乘坐电梯到一栋大厦的屋顶上去看，这就是一个柔道式的解决方案。</p>
+<p>我们总能用简单平常的方法去解决问题。这也就意味着不需要超炫的表现，你没有机会炫耀你的超强技术。你只要找个办法把问题解决就行了，赶紧去办下一件事去。这种方案也许没法为你带来声声喝彩，但是能让你不断前行。当找到合适的解决方法后，就用它了。总比浪费资源、甚至因为无法承担复杂的解决方案而在那干等要强。记住，以后你随时都可以把“刚刚好”变成“特别棒”。</p>
+</article>
+    </div>
+
+</div>
 </script>
 
-
-
-
 <script type="text/template" id="login-template">
+
       <header id="header"></header>
       <div class="login">
-        <form class="login-form">
-          <h2>Log In</h2>
+        <form class="login-form pure-form">
+        <fieldset>
+          <h2>登录</h2>
+
           <div class="error" style="display:none"></div>
           <input type="text" id="login-username" placeholder="Username" />
           <input type="password" id="login-password" placeholder="Password" />
-          <button>Log In</button>
+          <button class="pure-button pure-button-primary"><i class="fa fa-user"></i> 登录</button>
+              </fieldset>
         </form>
 
-        <form class="signup-form">
-          <h2>Sign Up</h2>
+        <form class="signup-form  pure-form">
+        <fieldset>
+          <h2>注册</h2>
           <div class="error" style="display:none"></div>
           <input type="text" id="signup-username" placeholder="Username" />
           <input type="password" id="signup-password" placeholder="Create a Password" />
-          <button>Sign Up</button>
+          <button class="pure-button pure-button-primary"><i class="fa fa-child"></i> 注册</button>
+          </fieldset>
         </form>
       </div>
     </script>
-
     <script type="text/template" id="manage-todos-template">
       <div id="user-info">
-        <button id="save" class="btn pure-button pure-button-primary ">增加联系人</button>
+        <button id="save" class="btn pure-button pure-button-primary "><i class="fa fa-user"> 增加联系人</i></button>
           Signed in as <%= AV.User.current().get("username") %> (<a href="#" class="log-out">Log out</a>)
       </div>
-
-      <div class="section">
-
-
-        
- 
-
         <div id="main">
-          
           <div id="todo-list" class="pure-g">
 
           </div>
         </div>
-
-      </div>
     </script>
-
     <script type="text/template" id="item-template">
         <div class="pure-form pure-form-stacked">
             <fieldset>
@@ -128,14 +130,12 @@
                     <input id="email" type="text" placeholder="电子邮箱" value="<%= email %>" name="email">
                 </div>
                 <div class="pure-controls">
-                     <button class="upd pure-button pure-button-primary">更新</button>
-                     <button class="todo-destroy pure-button pure-button-primary">删除</button>
+                     <button class="upd pure-button button-update"><i class="fa fa-pencil"> 更新</i></button>
+                     <button class="todo-destroy pure-button button-delete"><i class="fa fa-trash-o"> 删除</i></button>
                 </div>
             </fieldset>
         </div>
     </script>
-
-
 </body>
 </html>
 
