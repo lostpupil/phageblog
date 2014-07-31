@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="css/pure-min.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/grids-responsive-min.css">
+
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/underscore-1.1.6.js"></script>
     <script src="js/av-mini.js"></script>
@@ -33,12 +35,10 @@
 
     <div id="menu">
         <div class="pure-menu pure-menu-open">
-            <a class="pure-menu-heading" href="/">噬菌体部落</a>
-
+            <h3 class="pure-menu-headin">噬菌体部落</h2>
             <ul>
                 <p><a href="#home">首页</a></p>
-                <p><a href="#all">所有联系人</a></p>
-                <p><a href="#add">增加联系信息</a></p>
+                <p><a href="/">所有联系人</a></p>
             </ul>
         </div>
     </div>
@@ -88,35 +88,51 @@
 
     <script type="text/template" id="manage-todos-template">
       <div id="user-info">
-        Signed in as <%= AV.User.current().get("username") %> (<a href="#" class="log-out">Log out</a>)
+        <button id="save" class="btn pure-button pure-button-primary ">增加联系人</button>
+          Signed in as <%= AV.User.current().get("username") %> (<a href="#" class="log-out">Log out</a>)
       </div>
 
       <div class="section">
 
-        <header id="header">
-        <button id="save" class="btn ">Add New</button>
-        </header>
+
+        
+ 
 
         <div id="main">
           
-          <ul id="todo-list">
-          </ul>
+          <div id="todo-list" class="pure-g">
+
+          </div>
         </div>
 
       </div>
     </script>
 
     <script type="text/template" id="item-template">
-      <li >
-    <div class="view">
-      <button class="todo-destroy"></button>
-    </div>
-    <input value="<%= name %>" name="name">
-    <input value="<%=wechat %>" name="wechat">
-    <input value="<%=mobile %>" name="mobile">
-      <input value="<%=email%>" name="email">
-    <button class="upd">Update</button>
-      </li>
+        <div class="pure-form pure-form-stacked">
+            <fieldset>
+                <div class="pure-control-group">
+                   
+                    <input id="name" type="text" placeholder="姓名" value="<%= name %>" name="name">
+                </div>
+                <div class="pure-control-group">
+
+                    <input id="mobile" type="text" placeholder="手机" value="<%= mobile %>" name="mobile">
+                </div>
+                <div class="pure-control-group">
+
+                    <input id="wechat" type="text" placeholder="微信" value="<%= wechat %>" name="wechat">
+                </div>
+                <div class="pure-control-group">
+
+                    <input id="email" type="text" placeholder="电子邮箱" value="<%= email %>" name="email">
+                </div>
+                <div class="pure-controls">
+                     <button class="upd pure-button pure-button-primary">更新</button>
+                     <button class="todo-destroy pure-button pure-button-primary">删除</button>
+                </div>
+            </fieldset>
+        </div>
     </script>
 
 

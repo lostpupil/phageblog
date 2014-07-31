@@ -74,8 +74,9 @@ $(function() {
   // The DOM element for a todo item...
   var TodoView = AV.View.extend({
 
-    //... is a list tag.
-    tagName:  "li",
+
+    tagName:  "div",   // I know it's the default...
+   className : 'pure-u-1 pure-u-md-1-2 pure-u-lg-1-3',
 
     // Cache the template function for a single item.
     template: _.template($('#item-template').html()),
@@ -264,7 +265,19 @@ $(function() {
 
 
   });
+var HomeView = AV.View.extend({
+     events:{
 
+     },
+     el: ".content",
+      initialize: function() {
+         this.render();
+      },
+    render: function() {
+      this.$el.html(_.template($("#home-tpl").html()));
+      this.delegateEvents();
+           }
+  });
   var LogInView = AV.View.extend({
     events: {
       "submit form.login-form": "logIn",
@@ -353,14 +366,18 @@ $(function() {
     routes: {
       "all": "all",
       "active": "active",
-      "completed": "completed"
+      "completed": "completed",
+      "home":"home"
     },
 
     initialize: function(options) {
     },
+    home:function(){
+      new HomeView();
+    },
 
     all: function() {
-      state.set({ filter: "all" });
+ 
     },
 
     active: function() {
