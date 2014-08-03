@@ -13,7 +13,7 @@ $(function() {
     	mobile:"",
     	email:"",
     	wechat:"",
-        avatar:"",
+        avatar:"img/andy.jpg",
      	 done: false
     },
 
