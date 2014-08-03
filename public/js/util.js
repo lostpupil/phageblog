@@ -270,7 +270,7 @@ $(function() {
 
       this.todos.create({
        name: this.input.val(),
-        // order:   this.todos.nextOrder(),
+        order:   this.todos.nextOrder(),
         done:    false,
         user:    AV.User.current(),
         ACL:    allACL
