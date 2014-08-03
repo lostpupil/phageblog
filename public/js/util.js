@@ -68,6 +68,7 @@ $(function() {
             // Re-render the contents of the todo item.
             render: function() {
                 $(this.el).html(this.template(this.model.toJSON()));
+                console.log(this.model.toJSON());
                 return this;
             },
 
@@ -121,6 +122,7 @@ $(function() {
 
     // The DOM events specific to an item.
     events: {
+            "click .upload"   : "uploadavatar",
       "click .todo-destroy"   : "clear",
       "click .upd": "updateOnEnter", 
       "blur .edit"          : "close"
@@ -144,16 +146,33 @@ $(function() {
           this.email=this.$("input[name='email']");
       return this;
     },
+        uploadavatar: function() {
+      var fileUploadControl = $("#avatar")[0];
+      if (fileUploadControl.files.length > 0) {
+  var file = fileUploadControl.files[0];
+  var name = "photo.jpg";
 
+  var avFile = new AV.File(name, file);
+};
+avFile.save().then(function() {
+  this.model.set("avatar",avFile);
+  // The file has been saved to AV.
+}, function(error) {
+  // The file either could not be read, or could not be saved to AV.
+});
 
+      },
     // Close the `"editing"` mode, saving changes to the todo.
     close: function() {
       this.model.save({
-      	name:this.name.val(),
-      	mobile:this.mobile.val(),
-      	wechat:this.wechat.val(),
-      	email:this.email.val(),
+        name:this.name.val(),
+        mobile:this.mobile.val(),
+        wechat:this.wechat.val(),
+        email:this.email.val(),
+        avatar:avFile
       });
+
+      
 
     },
 

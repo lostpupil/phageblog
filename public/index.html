@@ -117,6 +117,11 @@
     <script type="text/template" id="item-template">
         <div class="pure-form pure-form-stacked">
             <fieldset>
+               <div class="pure-control-group">
+
+                    <input id="avatar" type="file" name="avatar" class="avatar">
+                    <button class=" pure-button upload pure-button-primary"><i class="fa fa-trash-o"> 上传</i></button>
+                </div>
                 <div class="pure-control-group">
                    
                     <input id="name" type="text" placeholder="姓名" value="<%= name %>" name="name">
@@ -150,11 +155,12 @@
 
 
 </script>
-
 <script type="text/template" id="single-tpl">
 
 <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
 <div class="card">
+
+<img src=">">
 <p>姓名：<%=name%></p>
 <p>手机：<%=mobile%></p>
 <p>邮箱：<%=email%></p>
