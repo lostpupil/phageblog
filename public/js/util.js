@@ -68,6 +68,57 @@ $(function() {
 
   });
 
+  var SingleView = AV.View.extend({
+            template: _.template($('#single-tpl').html()),
+            // The DOM events specific to an item.
+
+
+            initialize: function() {
+        _.bindAll(this, 'render');
+
+            },
+
+            // Re-render the contents of the todo item.
+            render: function() {
+                $(this.el).html(this.template(this.model.toJSON()));
+                return this;
+            },
+
+        });
+    var AllView = AV.View.extend({
+         el: ".content",
+          initialize: function() {
+             var self = this;
+             console.log(self);
+             _.bindAll(this, 'addOne', 'addAll');
+             this.people = new TodoList;
+             this.people.query = new AV.Query(Todo);
+             this.people.query.notEqualTo("done",true);
+            this.people.bind('add', this.addOne);
+            this.people.bind('reset', this.addAll);
+             this.people.fetch();
+             this.render();
+          },
+        addOne: function(todo) {
+            var view = new SingleView({
+                model:todo
+            });    
+        var something =view.render().el;
+        this.$("#impress").append(something.innerHTML);
+        },
+
+        // Add all items in the Todos collection at once.
+        addAll: function(collection) {
+            this.$("#impress").html("");
+            this.people.each(this.addOne);
+        },
+        render: function() {
+            this.$el.html(_.template($("#all-tpl").html()));
+            this.delegateEvents();
+             }
+
+    }); 
+
   // Todo Item View
   // --------------
 
@@ -175,8 +226,7 @@ $(function() {
 
       // Fetch all the todo items for this user
       this.todos.fetch();
-
-      state.on("change", this.filter, this);
+      
     },
 
     // Logs out the user and shows the login view
@@ -190,34 +240,9 @@ $(function() {
     // Re-rendering the App just means refreshing the statistics -- the rest
     // of the app doesn't change.
     render: function() {
-      var done = this.todos.done().length;
-      var remaining = this.todos.remaining().length;
-
-
-
       this.delegateEvents();
     },
 
-    // Filters the list based on which type of filter is selected
-    selectFilter: function(e) {
-      var el = $(e.target);
-      var filterValue = el.attr("id");
-      state.set({filter: filterValue});
-      AV.history.navigate(filterValue);
-    },
-
-    filter: function() {
-      var filterValue = state.get("filter");
-      this.$("ul#filters a").removeClass("selected");
-      this.$("ul#filters a#" + filterValue).addClass("selected");
-      if (filterValue === "all") {
-        this.addAll();
-      } else if (filterValue === "completed") {
-        this.addSome(function(item) { return item.get('done') });
-      } else {
-        this.addSome(function(item) { return !item.get('done') });
-      }
-    },
 
     // Resets the filters to display all todos
     resetFilters: function() {
@@ -377,11 +402,7 @@ var HomeView = AV.View.extend({
     },
 
     all: function() {
- 
-    },
-
-    active: function() {
-      state.set({ filter: "active" });
+      new AllView();
     },
 
     completed: function() {

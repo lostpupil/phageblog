@@ -38,8 +38,11 @@
         <div class="pure-menu pure-menu-open">
             <h3 class="pure-menu-heading">噬菌体部落</h2>
             <ul>
-                <li><a href="/">所有人</a></li>
+                 <li><a href="#all">所有人</a></li>
+                
                  <li><a href="#home">一些东西</a></li>
+
+                 <li><a href="/">每个人</a></li>
             </ul>
         </div>
     </div>
@@ -87,7 +90,7 @@
           <button class="pure-button pure-button-primary"><i class="fa fa-user"></i> 登录</button>
               </fieldset>
         </form>
-<!--             <form class="signup-form  pure-form">
+       <form class="signup-form  pure-form">
         <fieldset>
           <h2>注册</h2>
           <div class="error" style="display:none"></div>
@@ -95,7 +98,7 @@
           <input type="password" id="signup-password" placeholder="Create a Password" />
           <button class="pure-button pure-button-primary"><i class="fa fa-child"></i> 注册</button>
           </fieldset>
-        </form> -->
+        </form> 
 
       </div>
     </script>
@@ -137,6 +140,32 @@
             </fieldset>
         </div>
     </script>
+    <script type="text/template" id="all-tpl">
+
+        <table class="pure-table">
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>手机</td>
+                    <td>电子邮件</td>
+                    <td>微信</td>
+                </tr>
+            </thead>
+            <tbody  id="impress"  class="col">
+            </tbody>
+        </table>
+
+</script>
+<script type="text/template" id="single-tpl">
+<tr>
+        <td><%=name%></td>
+        <td><%=mobile%></td>
+        <td><%=email%></td>
+        <td><%=wechat%></td>
+</tr>
+
+
+</script>
 </body>
 </html>
 
