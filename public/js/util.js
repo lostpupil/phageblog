@@ -43,19 +43,6 @@ $(function() {
 
     // Reference to this collection's model.
     model: Todo,
-
-    // Filter down the list of all todo items that are finished.
-    done: function() {
-      return this.filter(function(todo){ return todo.get('done'); });
-    },
-
-    // Filter down the list to only todo items that are still not finished.
-    remaining: function() {
-      return this.without.apply(this, this.done());
-    },
-
-    // We keep the Todos in sequential order, despite being saved by unordered
-    // GUID in the database. This generates the next order number for new items.
     nextOrder: function() {
       if (!this.length) return 1;
       return this.last().get('order') + 1;
@@ -274,14 +261,17 @@ $(function() {
     // If you hit return in the main input field, create new Todo model
     createOnEnter: function(e) {
       var self = this;
-
+      //this set acl for users in order to read all list
+      
+      var allACL = new AV.ACL();
+      allACL. setPublicReadAccess(true);
 
       this.todos.create({
        name: this.input.val(),
         order:   this.todos.nextOrder(),
         done:    false,
         user:    AV.User.current(),
-        ACL:     new AV.ACL(AV.User.current())
+        ACL:    allACL
       });
 
       this.input.val('');
