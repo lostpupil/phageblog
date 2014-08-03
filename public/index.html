@@ -39,10 +39,8 @@
             <h3 class="pure-menu-heading">噬菌体部落</h2>
             <ul>
                  <li><a href="#all">所有人</a></li>
-                
-                 <li><a href="#home">一些东西</a></li>
-
                  <li><a href="/">每个人</a></li>
+                  <li><a href="#home">一些东西</a></li>
             </ul>
         </div>
     </div>
@@ -140,30 +138,27 @@
             </fieldset>
         </div>
     </script>
-    <script type="text/template" id="all-tpl">
 
-        <table class="pure-table">
-            <thead>
-                <tr>
-                    <td>姓名</td>
-                    <td>手机</td>
-                    <td>电子邮件</td>
-                    <td>微信</td>
-                </tr>
-            </thead>
-            <tbody  id="impress"  class="col">
-            </tbody>
-        </table>
+    <script type="text/template" id="all-tpl">
+      <div class="pure-g">
+      <div id="impress" >
+
+      </div>
+      </div>
+
 
 </script>
-<script type="text/template" id="single-tpl">
-<tr>
-        <td><%=name%></td>
-        <td><%=mobile%></td>
-        <td><%=email%></td>
-        <td><%=wechat%></td>
-</tr>
 
+<script type="text/template" id="single-tpl">
+
+<div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
+<div class="card">
+<p>姓名：<%=name%></p>
+<p>手机：<%=mobile%></p>
+<p>邮箱：<%=email%></p>
+<p>微信：<%=wechat%></p>
+</div>
+</div>
 
 </script>
 </body>
