@@ -13,6 +13,7 @@ $(function() {
     	mobile:"",
     	email:"",
     	wechat:"",
+        avatar:"",
      	 done: false
     },
 
@@ -146,19 +147,24 @@ $(function() {
           this.email=this.$("input[name='email']");
       return this;
     },
-        uploadavatar: function() {
-      var fileUploadControl = $("#avatar")[0];
-      if (fileUploadControl.files.length > 0) {
-  var file = fileUploadControl.files[0];
-  var name = "photo.jpg";
+uploadavatar: function() {
+        var people = this;
+var fileUploadControl = $("#avatar")[0];
+if (fileUploadControl.files.length > 0) {
+var file = fileUploadControl.files[0];
+var name = "photo.jpg";
 
-  var avFile = new AV.File(name, file);
+var avFile = new AV.File(name, file);
 };
 avFile.save().then(function() {
-  this.model.set("avatar",avFile);
+// console.log("before save");
+// console.log(avFile.url());
+// console.log(people.model);
+people.model.save("avatar",avFile.thumbnailURL(100, 200));
+// console.log("after save");
+
   // The file has been saved to AV.
 }, function(error) {
-  // The file either could not be read, or could not be saved to AV.
 });
 
       },
@@ -169,7 +175,6 @@ avFile.save().then(function() {
         mobile:this.mobile.val(),
         wechat:this.wechat.val(),
         email:this.email.val(),
-        avatar:avFile
       });
 
       
