@@ -92,8 +92,10 @@
         <fieldset>
           <h2>注册</h2>
           <div class="error" style="display:none"></div>
-          <input type="text" id="signup-username" placeholder="Username" />
-          <input type="password" id="signup-password" placeholder="Create a Password" />
+          <input type="text" id="signup-username" placeholder="Username" pattern="[A-z]{8,16}"
+  title="At least 8 chars! And no more than 16 chars! Asswhole." />
+          <input type="password" id="signup-password" placeholder="Create a Password"  pattern="^[a-zA-Z]\w{5,17}$"
+  title="At least 6 chars! And no more than 16 chars! Dude."/>
           <button class="pure-button pure-button-primary"><i class="fa fa-child"></i> 注册</button>
           </fieldset>
         </form> 
@@ -129,7 +131,7 @@
                 </div>
                 <div class="pure-control-group">
 
-                    <input id="email" type="text" placeholder="电子邮箱" value="<%= email %>" name="email">
+                    <input id="email" type="email" placeholder="电子邮箱" value="<%= email %>" name="email">
                 </div>
                 <div class="pure-controls">
                      <button class="upd pure-button button-update"><i class="fa fa-pencil"> 更新</i></button>
